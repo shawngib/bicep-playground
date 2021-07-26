@@ -5,7 +5,8 @@ param namePrefix string = 'myunique'
 param globalRedundancy bool = true
 
 // vars
-var storageAccountName = '${namePrefix}${uniqueString(resourceGroup().id)}'
+var storageAccountNameFull = '${namePrefix}${uniqueString(resourceGroup().id)}'
+var storageAccountName = take(storageAccountNameFull, 24)
 
 // main
 resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = if(currentYear == '2021') {
